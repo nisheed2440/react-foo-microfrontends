@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "debug": false,
+        "modules": false,
+        "targets": {
+          "browsers": ["last 2 versions"]
+        }
+      }
+    ],
+    "babel-preset-react"
+  ],
+  "plugins": ["transform-runtime", "emotion"]
+}
