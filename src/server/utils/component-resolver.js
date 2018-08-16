@@ -38,7 +38,7 @@ async function componentResolver(inputTemplate) {
     } catch (err) {
       componentData = {};
     }
-    scriptsDataObject[componentId] = componentData || {};
+    scriptsDataObject[componentType] = componentData || {};
     el.removeAttribute('data-json');
     componentScriptPromises.push(
       rp(`http://localhost:9000/modules/${componentType}/1.0.0/${componentType}.component.js`)
@@ -68,20 +68,24 @@ async function componentResolver(inputTemplate) {
       if (componentReact.getInitialProps) {
         componentPropsPromises.push(
           componentReact.getInitialProps().then(state => {
-            scriptsDataObject[componentId] = state;
+            scriptsDataObject[componentType] = state;
             const el = dom.window.document.querySelector(`[data-compId=${componentId}]`);
-            el.innerHTML = ReactDOMServer.renderToString(React.createElement(componentReact, scriptsDataObject[componentId], null));
+            el.innerHTML = ReactDOMServer.renderToString(
+              React.createElement(componentReact, { store: { ...scriptsDataObject[componentType] } }, null)
+            );
           })
         );
       } else {
         const el = dom.window.document.querySelector(`[data-compId=${componentId}]`);
-        el.innerHTML = ReactDOMServer.renderToString(React.createElement(componentReact, scriptsDataObject[componentId], null));
+        el.innerHTML = ReactDOMServer.renderToString(React.createElement(componentReact, { store: { ...scriptsDataObject[componentType] } }, null));
       }
     });
     return componentPropsPromises;
   });
 
   await Promise.all(propsPromises);
+
+  createInlineScriptDataObject(dom, scriptsDataObject, 'FOOData');
 
   commonScripts.forEach(src => {
     dom.window.document.body.appendChild(createScript(dom, src, null));
@@ -90,11 +94,11 @@ async function componentResolver(inputTemplate) {
   commonStyles.forEach(src => {
     dom.window.document.head.appendChild(createStyle(dom, src, null));
   });
-
-  createInlineScriptDataObject(dom, scriptsDataObject, 'FOOData');
+  
   _.forEach(scriptsURLObject, (value, key) => {
     dom.window.document.body.appendChild(createScript(dom, value, key, true));
   });
+
   return dom.serialize();
 }
 

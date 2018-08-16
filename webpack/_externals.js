@@ -74,6 +74,18 @@ module.exports = function() {
       commonjs: 'exenv',
       commonjs2: 'exenv',
       root: 'ExecutionEnvironment'
+    },
+    mobx: {
+      amd: 'mobx',
+      commonjs: 'mobx',
+      commonjs2: 'mobx',
+      root: 'Mobx'
+    },
+    'mobx-react': {
+      amd: 'mobx-react',
+      commonjs: 'mobx-react',
+      commonjs2: 'mobx-react',
+      root: 'MobxReact'
     }
   };
 };

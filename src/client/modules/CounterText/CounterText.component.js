@@ -2,25 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ExecutionEnvironment from 'exenv';
+import { extendObservable } from 'mobx';
+import { observer } from 'mobx-react';
 
-class CounterText extends React.PureComponent {
+@observer
+class CounterText extends React.Component {
   render() {
-    const { initialValue } = this.props;
-    return (
-      <p className="title is-size-1">
-        {initialValue}
-      </p>
-    );
+    const { store } = this.props;
+    return <p className="title is-size-1">{store.counterValue}</p>;
   }
 }
 
 CounterText.propTypes = {
-  initialValue: PropTypes.any.isRequired
+  store: PropTypes.any.isRequired
 };
 
 if (ExecutionEnvironment.canUseDOM) {
   [...document.querySelectorAll('[data-component="CounterText"]')].forEach(el => {
-    ReactDOM.hydrate(<CounterText {...window.FOOData[el.getAttribute('data-compId')]} />, el);
+    extendObservable(window.Store, window.FOOData[el.getAttribute('data-component')]);
+    ReactDOM.hydrate(<CounterText store={window.Store} />, el);
   });
 }
 
