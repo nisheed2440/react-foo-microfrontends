@@ -52,6 +52,10 @@ function getComponentWebpackRules({ ExtractTextPlugin }) {
           }
         ]
       })
+    },
+    {
+      test: /\.(png|svg|jpg|gif)$/,
+      use: ['file-loader']
     }
   ];
 }

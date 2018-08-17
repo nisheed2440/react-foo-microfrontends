@@ -7,6 +7,9 @@ import { observer } from 'mobx-react';
 
 @observer
 class CounterText extends React.Component {
+  componentWillReact() {
+    console.log('CounterText will re-render, since the counterValue has changed!');
+  }
   render() {
     const { store } = this.props;
     return <p className="title is-size-1">{store.counterValue}</p>;

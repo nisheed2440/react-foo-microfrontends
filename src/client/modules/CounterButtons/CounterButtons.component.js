@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { extendObservable } from 'mobx';
+import { observer } from 'mobx-react';
 import ExecutionEnvironment from 'exenv';
 
-class CounterButtons extends React.PureComponent {
+@observer
+class CounterButtons extends React.Component {
   increment = () => {
     const { store } = this.props;
     if (typeof store.counterValue === 'number') {
@@ -17,6 +19,9 @@ class CounterButtons extends React.PureComponent {
       store.counterValue -= 1;
     }
   };
+  componentWillReact() {
+    console.log('CounterButton will re-render, since the counterValue has changed!');
+  }
   render() {
     const { store } = this.props;
     return (

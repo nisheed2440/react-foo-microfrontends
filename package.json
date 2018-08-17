@@ -7,9 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node webpack.js -s -w",
     "serve": "http-server ./dist -p 9000",
-    "start": "npm-run-all --parallel build serve",
-    "app:start": "node ./src/server/bin/www",
-    "app": "SET DEBUG=amf-node:* & app:start"
+    "start": "npm-run-all --parallel serve \"build -- {@}\" --",
+    "app": "node ./src/server/bin/www"
   },
   "author": "",
   "license": "ISC",
@@ -45,6 +44,7 @@
     "eslint-plugin-react": "^7.7.0",
     "exenv": "^1.2.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.2",
     "http-server": "^0.11.1",
@@ -62,6 +62,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bulma": "^0.7.1",
+    "classnames": "^2.2.6",
     "cookie-parser": "~1.4.3",
     "core-js": "^2.5.7",
     "debug": "~2.6.9",

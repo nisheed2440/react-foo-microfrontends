@@ -59,7 +59,8 @@ module.exports = {
     'react/require-default-props': 0,
     'react/require-extension': 0,
     'react/self-closing-comp': 0,
-    'react/prefer-stateless-function': 0
+    'react/prefer-stateless-function': 0,
+    'line-break-style': 0
   },
   settings: {}
 };

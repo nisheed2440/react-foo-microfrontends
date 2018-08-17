@@ -104,14 +104,14 @@ function getMinimizerConfig() {
  * @param {String} version The component version
  */
 function getComponentPublicPath(componentName, version) {
-  return `localhost:9000/modules/${componentName}/${version}/`;
+  return `http://localhost:9000/modules/${componentName}/${version}/`;
 }
 
 /**
  * Function to retrieve the public path of the vendor used for chunking and component specific assets
  */
 function getVendorPublicPath() {
-  return `localhost:9000/vendor/`;
+  return `http://localhost:9000/vendor/`;
 }
 /**
  * Function to create the component configs used by webpack for component builds

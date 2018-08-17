@@ -9,5 +9,6 @@ export const ReactRedux = require('react-redux');
 export const ExecutionEnvironment = require('exenv');
 export const Mobx = require('mobx');
 export const MobxReact = require('mobx-react');
+export const classNames = require('classnames');
 export { default as Store } from './store';
 /* eslint-enable */

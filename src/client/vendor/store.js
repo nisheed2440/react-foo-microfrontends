@@ -1,4 +1,5 @@
-class FooStore {}
+import { observable } from 'mobx';
 
-const store = new FooStore();
+const store = observable({});
+
 export default store;
